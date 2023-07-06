@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\students;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StudentFormRequest;
+use App\Models\student\Student;
 use Illuminate\Http\Request;
 
 class StudentsController extends Controller
@@ -10,7 +12,8 @@ class StudentsController extends Controller
     //display all students
      public function index()
      {
-         return view('students.index');
+        $students=Student::latest()->paginate(10);
+         return view('students.index',['students'=>$students]);
      }
  
      //create  students view
@@ -20,14 +23,32 @@ class StudentsController extends Controller
      }
  
      //Store  students in database
-     public function store()
+     public function store(StudentFormRequest $request)
      {
+        $request->validated();
+        $image = time().'.'.$request->image->extension();
+        $request->image->move(public_path('students'), $image);
+        Student::create([
+            'firstName'=>$request->firstName,
+            'lastName'=>$request->lastName,
+            'middleName'=>$request->middleName,
+            'studentId'=>$request->studentId,
+            'class'=>$request->class,
+            'gender'=>$request->gender,
+            'year_joined'=>$request->year,
+            'image_url'=>$image,
+            'age'=>$request->age,
+        ]);
+        return redirect(route('students.index'))->with('success','Student created successfully');
      }
  
      //show students information
-     public function show()
+     public function show($id)
      {
-         return view('students.show');
+         $student=Student::findOrFail($id);
+         return view('students.show',[
+            'student'=>$student,
+         ]);
      }
      //Editstudents page
      public function edit()
@@ -35,8 +56,9 @@ class StudentsController extends Controller
          return view('students.edit');
      }
      //display all students
-     public function update()
+     public function update(StudentFormRequest $request)
      {
+        $request->validated();
      }
  
      //Delete students

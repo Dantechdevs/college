@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('year_joined');
             $table->string('class');
             $table->string('Age');
-            $table->foreignId('class_id')->constrained();
+           // $table->foreignId('class_id')->constrained();
 
             $table->timestamps();
         });

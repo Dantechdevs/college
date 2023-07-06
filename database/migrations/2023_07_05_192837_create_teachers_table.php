@@ -13,7 +13,12 @@ return new class extends Migration
     {
         Schema::create('teachers', function (Blueprint $table) {
             $table->id();
-            
+            $table->string('teacherId');
+            $table->string('firstName');
+            $table->string('middleName');
+            $table->string('lastName');
+            $table->string('image_url');
+            $table->foreignId('courses_id')->constrained()->nullable();
             $table->timestamps();
         });
     }
