@@ -18,7 +18,7 @@ class CourseController extends Controller
     //create  courses view
     public function create()
     {
-        return view('courses.index');
+        return view('courses.create');
     }
 
     //Store  courses in database

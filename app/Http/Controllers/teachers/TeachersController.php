@@ -16,7 +16,7 @@ class TeachersController extends Controller
     //create  teachers view
     public function create()
     {
-        return view('teachers.index');
+        return view('teachers.create');
     }
 
     //Store  teachers in database

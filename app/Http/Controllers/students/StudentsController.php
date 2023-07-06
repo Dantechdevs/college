@@ -16,7 +16,7 @@ class StudentsController extends Controller
      //create  students view
      public function create()
      {
-         return view('students.index');
+         return view('students.create');
      }
  
      //Store  students in database

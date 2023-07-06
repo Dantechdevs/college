@@ -16,6 +16,26 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
                 </div>
+                 {{-- Teachers --}}
+                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link href="{{ route('teachers.index') }}" :active="request()->routeIs('teachers.index')">
+                        {{ __('Teachers') }}
+                    </x-nav-link>
+                </div>
+                {{-- studets --}}
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link href="{{ route('students.index') }}" :active="request()->routeIs('students.index')">
+                        {{ __('Students') }}
+                    </x-nav-link>
+                </div>
+                 {{-- Courses --}}
+                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link href="{{ route('courses.index') }}" :active="request()->routeIs('courses.index')">
+                        {{ __('Courses') }}
+                    </x-nav-link>
+                </div>
+
+                {{-- end nav --}}
             </div>
 
             <div class="hidden sm:flex sm:items-center sm:ml-6">
