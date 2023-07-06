@@ -9,23 +9,37 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 bg-white p-5">
            {{-- max-w --}}
            <form>
+            {{-- first name --}}
             <div class="grid gap-6 mb-6 md:grid-cols-2">
                 <div>
-                    <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">First name</label>
-                    <input type="text" id="first_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" >
+                    <label for="firstname" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">First name</label>
+                    <input type="text" id="firstname" name="firstName"class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" >
+                    @error('firstName')
+                        <span>{{ $message }}</span>
+                    @enderror
                 </div>
+                {{-- lastName --}}
                 <div>
-                    <label for="last_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Midle name</label>
-                    <input type="text" id="last_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"  >
+                    <label for="middlename" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Midle name</label>
+                    <input type="text"   name="middleName"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"  >
+                    @error('middleName')
+                    <span>{{ $message }}</span>
+                @enderror
                 </div>
+                {{-- lastName --}}
                 <div>
-                    <label for="company" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Last Name</label>
-                    <input type="text" id="company" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Flowbite" >
+                    <label for="lastname" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Last Name</label>
+                    <input type="text"  name="lastName"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" >
+                    @error('lastName')
+                    <span>{{ $message }}</span>
+                @enderror
                 </div>  
+                {{-- -phone --}}
                 <div>
                     <label for="phone" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Phone number</label>
                     <input type="tel" id="phone" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="123-45-678" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" >
                 </div>
+                {{-- -image --}}
                 <div>
                     <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input">Upload Teachers Image</label>
                     <input class="block w-full text-sm text-gray-50 border border-blue-500 rounded-lg cursor-pointer bg-green-800 dark:text-gray-400 focus:outline-none dark:bg-gray-200 dark:border-indigo-800 dark:placeholder-gray-400" aria-describedby="file_input_help" id="file_input" type="file">
