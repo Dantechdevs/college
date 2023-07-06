@@ -12,7 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('scores', function (Blueprint $table) {
-            $table->id();
+           $table->id();
+           // $table->string('score_id');
+            $table->string('percentage');
             $table->timestamps();
         });
     }

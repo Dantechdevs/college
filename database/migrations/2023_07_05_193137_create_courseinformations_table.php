@@ -13,6 +13,13 @@ return new class extends Migration
     {
         Schema::create('courseinformations', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('courses_id')->constrained();
+            $table->foreignId('student_id')->constrained();
+            $table->foreignId('teacher_id')->constrained();
+           // $table->foreignId('courses_id')->constrained();
+            $table->string('score');
+            $table->string('year_chosen');
+
             $table->timestamps();
         });
     }
