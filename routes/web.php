@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\courses\CourseController;
+use App\Http\Controllers\PagesController;
 use App\Http\Controllers\students\StudentsController;
 use App\Http\Controllers\teachers\TeachersController;
 use Illuminate\Support\Facades\Route;
@@ -15,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
+//Route::post('pages/store',[TeachersController::class,'store'])->name('pages.store');
 Route::get('/', function () {
     return view('welcome');
 });
@@ -40,7 +41,7 @@ Route::middleware([
     });
     //teachers routes
     Route::prefix('teachers')->group(function(){
-        Route::get('/',[TeachersController::class,'index'])->name('teachers.index');
+        Route::get('/home',[TeachersController::class,'index'])->name('teachers.index');
         Route::get('/create',[TeachersController::class,'create'])->name('teachers.create');
         Route::post('/store',[TeachersController::class,'store'])->name('teachers.store');
         Route::get('/{id}/edit',[TeachersController::class,'edit'])->name('teachers.edit');
