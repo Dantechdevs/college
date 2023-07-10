@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\teachers;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\TeachersFormRequest;
+use App\Models\teachers\Teacher;
 use Illuminate\Http\Request;
 
 class TeachersController extends Controller
@@ -20,29 +22,61 @@ class TeachersController extends Controller
     }
 
     //Store  teachers in database
-    public function store()
+    public function store(TeachersFormRequest $request)
     {
+        $request->validated();
+        $image = time().'.'.$request->image->extension();
+        $request->image->move(public_path('teachers'), $image);
+        Teacher::create([
+            'firstName'=>$request->firstName,
+            'lastName'=>$request->lastName,
+            'middleName'=>$request->middleName,
+            'teacherId'=>$request->teacherId,
+            'courses_id'=>$request->courses_id,
+            'image_url'=>$image,
+        ]);
+        return redirect(route('teachers.index'))->with('success','Student created successfully');
     }
 
     //show  teacher information
-    public function show()
+    public function show($id)
     {
-        return view('teachers.show');
+        $teacher=Teacher::findOrFail($id);
+        return view('teachers.show',[
+            'teacher'=>$teacher,
+        ]);
     }
     //Edit teacher page
-    public function edit()
+    public function edit($id)
     {
-        return view('teachers.edit');
+        $teacher=Teacher::findOrFail($id);
+        return view('teachers.edit',[
+            'teacher'=>$teacher,
+        ]);
     }
     //display all teachers
-    public function update()
+    public function update(TeachersFormRequest $request , $id)
     {
+        $request->validated();
+        $teacher=Teacher::findOrFail($id);
+        $image = $teacher->image;
+       $teacher->update([
+            'firstName'=>$request->firstName,
+            'lastName'=>$request->lastName,
+            'middleName'=>$request->middleName,
+            'teacherId'=>$request->teacherId,
+            'courses_id'=>$request->courses_id,
+            'image_url'=>$image,
+        ]);
+        return redirect(route('teachers.index'))->with('success','Student created successfully'); 
     }
 
     //Delete teachers
-    public function destroy()
+    public function destroy($id)
     {
-        return view('teachers.index');
+
+        $teacher=Teacher::findOrFail($id);
+        return view('teachers.index')->with('danger','Teacher Deleted successfully');
     }
     //Search teachers
     public function searchTeacher()
