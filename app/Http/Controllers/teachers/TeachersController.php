@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\teachers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\teachers\Teacher;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\TeacherFormRequest;
 
 class TeachersController extends Controller
 {
