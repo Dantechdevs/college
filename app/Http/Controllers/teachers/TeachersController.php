@@ -22,7 +22,7 @@ class TeachersController extends Controller
     }
 
     //Store  teachers in database
-    public function store(TeachersFormRequest $request)
+    public function store()
     {
         $request->validated();
         $image = time().'.'.$request->image->extension();
