@@ -44,6 +44,7 @@ Route::middleware([
         Route::get('/home',[TeachersController::class,'index'])->name('teachers.index');
         Route::get('/create',[TeachersController::class,'create'])->name('teachers.create');
         Route::post('/store',[TeachersController::class,'store'])->name('teachers.store');
+        Route::get('/{id}',[TeachersController::class,'show'])->name('teachers.show');
         Route::get('/{id}/edit',[TeachersController::class,'edit'])->name('teachers.edit');
         Route::patch('/{id}',[TeachersController::class,'update'])->name('teachers.update');
         Route::delete('/{id}',[TeachersController::class,'destroy'])->name('teachers.destroy');

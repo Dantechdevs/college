@@ -27,8 +27,10 @@ class TeacherFormRequest extends FormRequest
             'lastName'=>['required'],
             'middleName'=>['required'],
             'teacherId'=>['required'],
-            'image_url'=>['required','image','mimes:jpg,jpeg,png'],
-            'coursesId'=>['required'],
+            'image'=>['required','image','mimes:jpg,jpeg,png'],
+           // 'coursesId'=>['required'],
+           // 'phone'=>['required'],
+           // 'email'=>['required'],
         ];
     }
 }
