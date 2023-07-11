@@ -44,7 +44,7 @@
                   <span class="text-red-500">{{$message}}</span>
                 @enderror
                 </div>
-                {{-- -image --}}
+                {{-- -imagep; --}}
                 <div>
                     <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input">Upload Teachers Image</label>
                     <input class="block w-full text-sm text-gray-50 border border-blue-500 rounded-lg cursor-pointer bg-green-800 dark:text-gray-400 focus:outline-none dark:bg-gray-200 dark:border-indigo-800 dark:placeholder-gray-400" aria-describedby="file_input_help" id="file_input" type="file" name="image">

@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\students;
 
+use Illuminate\Http\Request;
+use App\Models\student\Student;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StudentFormRequest;
-use App\Models\student\Student;
-use Illuminate\Http\Request;
+use App\Http\Requests\StudentUpdateFormRequest;
 
 class StudentsController extends Controller
 {
@@ -51,20 +52,47 @@ class StudentsController extends Controller
          ]);
      }
      //Editstudents page
-     public function edit()
+     public function edit($id)
      {
-         return view('students.edit');
+        $student=Student::findOrFail($id);
+         return view('students.edit',[
+            'student'=>$student,
+         ]);
      }
      //display all students
-     public function update(StudentFormRequest $request)
+     public function update(StudentUpdateFormRequest $request, $id)
      {
         $request->validated();
+         $student=Student::findOrFail($id);
+        if($request->has('image')){
+            $image = time().'.'.$request->image->extension();
+            $request->image->move(public_path('students'), $image);
+        }else{
+            $image=$student->image_url; 
+        }
+       
+        $student->update([
+            'firstName'=>$request->firstName,
+            'lastName'=>$request->lastName,
+            'middleName'=>$request->middleName,
+            'studentId'=>$request->studentId,
+            'class'=>$request->class,
+            'gender'=>$request->gender,
+            'year_joined'=>$request->year,
+            'image_url'=>$image,
+            'age'=>$request->age,
+        ]);
+        return redirect(route('students.index'))->with('success','Student updated successfully');
+
+
      }
  
      //Delete students
-     public function destroy()
+     public function destroy($id)
      {
-         return view('students.index');
+        $student=Student::findOrFail($id);
+        $student->delete();
+        return redirect(route('students.index'))->with('danger','Student Deted successfully');
      }
      //Search students
      public function searchTeacher()
