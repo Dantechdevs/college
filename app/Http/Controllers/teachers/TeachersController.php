@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\teachers;
 
+use Illuminate\Http\Request;
+use App\Models\teachers\Teacher;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\TeacherFormRequest;
-use App\Models\teachers\Teacher;
-use Illuminate\Http\Request;
 
 class TeachersController extends Controller
 {
@@ -25,44 +25,32 @@ class TeachersController extends Controller
     //Store  teachers in database
     public function store(TeacherFormRequest $request)
     {
-    
-        $request->validate();
-        $image = time().'.'.$request->image->extension();
-        $request->image->move(public_path('teachers'), $image);
-        Teacher::create([
-            'firstName'=>$request->firstName,
-            'lastName'=>$request->lastName,
-            'middleName'=>$request->middleName,
-            'teacherId'=>$request->teacherId,
-            'image_url'=>$request->image,
-            'courses_id'=>$request->courseId,
-        ]);
-        return redirect(route('teachers.index'))->with('success','Teacher created successfully');
-    
     }
 
     //show  teacher information
-    public function show($id)
-    {   $teacher=Teacher::findOrfail($id);
-        return view('teachers.show',[
+    public function show()
+    {
+        return view('teachers.show');
+    }
+    //Edit teacher page
+    public function edit($id)
+    {
+        $teacher=Teacher::findOrFail($id);
+        return view('teachers.edit',[
             'teacher'=>$teacher,
         ]);
     }
-    //Edit teacher page
-    public function edit()
-    {
-        return view('teachers.edit');
-    }
     //display all teachers
-    public function update(TeacherFormRequest $request)
+    public function update()
     {
-        $request->validate();
     }
 
     //Delete teachers
-    public function destroy()
+    public function destroy($id)
     {
-        return view('teachers.index');
+
+        $teacher=Teacher::findOrFail($id);
+        return view('teachers.index')->with('danger','Teacher Deleted successfully');
     }
     //Search teachers
     public function searchTeacher()

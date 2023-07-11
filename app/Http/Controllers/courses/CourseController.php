@@ -4,7 +4,8 @@ namespace App\Http\Controllers\courses;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
+use App\Models\courses\Course;
+use App\Http\Requests\CoursesFormRequest;
 class CourseController extends Controller
 {
     //
@@ -12,7 +13,11 @@ class CourseController extends Controller
     //display all courses
     public function index()
     {
-        return view('courses.index');
+        $courses=Course::latest()->get();
+       // dd($courses);
+        return view('courses.index',[
+            'courses'=>$courses,
+        ]);
     }
 
     //create  courses view
@@ -22,8 +27,16 @@ class CourseController extends Controller
     }
 
     //Store  courses in database
-    public function store()
+    public function store(CoursesFormRequest $request)
     {
+        $request->validated();
+        Course::create([
+            'name'=>$request->name,
+            'grade'=>$request->grade,
+            'credit'=>$request->credit,
+            'courseId'=>$request->courseId,
+        ]);
+        return redirect(route('courses.index'))->with('success','Course created successfully');
     }
 
     //show courses information
@@ -32,19 +45,35 @@ class CourseController extends Controller
         return view('courses.show');
     }
     //Editcourses page
-    public function edit()
+    public function edit($id)
     {
-        return view('courses.edit');
+        $course=Course::findOrFail($id);
+        return view('courses.edit',[
+            'course'=>$course,
+        ]);
     }
     //display all courses
-    public function update()
+    public function update(CoursesFormRequest $request,$id)
     {
+        $request->validated();
+        $course=Course::findOrFail($id);
+        $course->update([
+            'name'=>$request->name,
+            'grade'=>$request->grade,
+            'credit'=>$request->credit,
+            'courseId'=>$request->courseId,
+        ]);
+        return redirect(route('courses.index'))->with('success','Course updated successfully');
     }
 
     //Delete courses
-    public function destroy()
+    public function destroy($id)
+      
     {
-        return view('courses.index');
+          $courses=Course::findOrFail($id);
+     $courses->delete();
+       
+        return redirect(route('courses.index'))->with('danger','Course deleted successfully');
     }
     //Search courses
     public function searchTeacher()
